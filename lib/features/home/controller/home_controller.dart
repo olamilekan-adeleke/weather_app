@@ -6,9 +6,7 @@ class HomeController {
   final RxString bottomSheetHeading = 'Forecast report'.obs;
 
   void openBottomSheet() {
-    CustomBottomModalService.showModal(
-      const BottomSheetWidget(),
-    );
+    CustomBottomModalService.showModal(const BottomSheetWidget());
   }
 
   void toggleView() {
@@ -17,5 +15,11 @@ class HomeController {
     } else if (bottomSheetHeading.value == 'Your Notifications') {
       bottomSheetHeading.value = 'Forecast report';
     }
+  }
+
+  void openNotifications() {
+    bottomSheetHeading.value = 'Your Notifications';
+
+    CustomBottomModalService.showModal(const BottomSheetWidget());
   }
 }

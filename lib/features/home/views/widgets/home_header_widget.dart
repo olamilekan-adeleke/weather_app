@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:weather_app/cores/components/custom_text_widget.dart';
 import 'package:weather_app/cores/utils/custom_sizer_utils.dart';
-
+import 'package:weather_app/features/home/controller/home_controller.dart';
 
 class HomeHeaderWidget extends StatelessWidget {
   const HomeHeaderWidget({
     Key? key,
   }) : super(key: key);
+
+  static final HomeController homeController = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {
@@ -37,20 +40,23 @@ class HomeHeaderWidget extends StatelessWidget {
             ],
           ),
         ),
-        Container(
-          padding: EdgeInsets.symmetric(
-            horizontal: sizerSp(10),
-            vertical: sizerSp(10),
-          ),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(sizerSp(10)),
-            color: const Color(0xff7E59Ed),
-          ),
-          alignment: Alignment.center,
-          child: SvgPicture.asset(
-            'asset/bell.svg',
-            height: sizerSp(20),
-            width: sizerSp(20),
+        GestureDetector(
+          onTap: () => homeController.openNotifications(),
+          child: Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: sizerSp(10),
+              vertical: sizerSp(10),
+            ),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(sizerSp(10)),
+              color: const Color(0xff7E59Ed),
+            ),
+            alignment: Alignment.center,
+            child: SvgPicture.asset(
+              'asset/bell.svg',
+              height: sizerSp(20),
+              width: sizerSp(20),
+            ),
           ),
         ),
       ],
