@@ -173,7 +173,7 @@ class HomeHeaderWidget extends StatelessWidget {
           child: SvgPicture.asset(
             'asset/bell.svg',
             height: sizerSp(20),
-            width: sizerSp(20h),
+            width: sizerSp(20),
           ),
         ),
       ],
