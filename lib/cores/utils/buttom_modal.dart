@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CustomButtomModalService {
+class CustomBottomModalService {
   static void showModal(Widget child) {
     Get.bottomSheet(
       child,
-      isDismissible: false,
+      isDismissible: true,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       enableDrag: false,
       backgroundColor: Colors.grey,
