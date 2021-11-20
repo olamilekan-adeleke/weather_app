@@ -6,6 +6,7 @@ import 'package:weather_app/cores/constants/color.dart';
 import 'package:weather_app/cores/utils/custom_sizer_utils.dart';
 import 'package:weather_app/features/home/controller/home_controller.dart';
 import 'package:weather_app/features/home/views/widgets/forecast_report_widget.dart';
+import 'package:weather_app/features/home/views/widgets/notifications_widgets.dart';
 
 class BottomSheetWidget extends StatelessWidget {
   const BottomSheetWidget({Key? key}) : super(key: key);
@@ -56,7 +57,9 @@ class BottomSheetWidget extends StatelessWidget {
             if (homeController.bottomSheetHeading.value == 'Forecast report') {
               return const ForecastReportWidget();
             } else if (homeController.bottomSheetHeading.value ==
-                'Your Notifications') {}
+                'Your Notifications') {
+              return const NotificationWidget();
+            }
 
             return Container();
           }),
