@@ -3,11 +3,10 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../cores/constants/color.dart';
 import '../../cores/constants/font_size.dart';
 
-
 Widget textWidget(
   String text, {
   double? size = kfsMeduim,
-  Color? color = kcTextColor,
+  Color? color = white,
   FontWeight? fontWeight = FontWeight.w400,
   TextAlign? align = TextAlign.justify,
   int? maxLines,
@@ -15,7 +14,7 @@ Widget textWidget(
 }) {
   return Text(
     text,
-    style: GoogleFonts.blinker(
+    style: GoogleFonts.dmSans(
       fontSize: size,
       color: color,
       fontWeight: fontWeight,
