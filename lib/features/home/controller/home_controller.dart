@@ -10,4 +10,12 @@ class HomeController {
       const BottomSheetWidget(),
     );
   }
+
+  void toggleView() {
+    if (bottomSheetHeading.value == 'Forecast report') {
+      bottomSheetHeading.value = 'Your Notifications';
+    } else if (bottomSheetHeading.value == 'Your Notifications') {
+      bottomSheetHeading.value = 'Forecast report';
+    }
+  }
 }

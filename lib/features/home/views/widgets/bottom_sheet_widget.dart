@@ -37,12 +37,15 @@ class BottomSheetWidget extends StatelessWidget {
               children: <Widget>[
                 Obx(
                   () {
-                    return Container(
-                      child: textWidget(
-                        homeController.bottomSheetHeading.value,
-                        size: sizerSp(12),
-                        fontWeight: FontWeight.w400,
-                        color: const Color(0xff8862FC),
+                    return GestureDetector(
+                      onTap: () => homeController.toggleView(),
+                      child: Container(
+                        child: textWidget(
+                          homeController.bottomSheetHeading.value,
+                          size: sizerSp(12),
+                          fontWeight: FontWeight.w400,
+                          color: const Color(0xff8862FC),
+                        ),
                       ),
                     );
                   },
