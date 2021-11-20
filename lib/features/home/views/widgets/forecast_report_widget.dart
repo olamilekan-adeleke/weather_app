@@ -91,6 +91,7 @@ class NextForecastReportWidget extends StatelessWidget {
             border: Border.all(color: kcTextColor.withOpacity(.5)),
           ),
           child: ListView.separated(
+            physics: const BouncingScrollPhysics(),
             separatorBuilder: (_, __) => const Divider(),
             itemCount: 20,
             itemBuilder: (_, int index) {
@@ -169,6 +170,7 @@ class TodayForecastReportWidget extends StatelessWidget {
             border: Border.all(color: kcTextColor.withOpacity(.5)),
           ),
           child: ListView.builder(
+            physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             itemCount: 20,
             itemBuilder: (_, int index) {
