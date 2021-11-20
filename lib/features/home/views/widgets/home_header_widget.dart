@@ -6,6 +6,7 @@ import 'package:weather_app/cores/components/custom_text_widget.dart';
 import 'package:weather_app/cores/utils/custom_sizer_utils.dart';
 import 'package:weather_app/features/home/controller/home_controller.dart';
 
+
 class HomeHeaderWidget extends StatelessWidget {
   const HomeHeaderWidget({
     Key? key,
@@ -41,7 +42,7 @@ class HomeHeaderWidget extends StatelessWidget {
           ),
         ),
         GestureDetector(
-          onTap: () => homeController.openNotifications(),
+          onTap: ()=> homeController.openNotifications(),
           child: Container(
             padding: EdgeInsets.symmetric(
               horizontal: sizerSp(10),
