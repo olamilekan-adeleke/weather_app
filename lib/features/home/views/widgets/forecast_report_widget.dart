@@ -10,44 +10,14 @@ class ForecastReportWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: sizerSp(15)),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          SizedBox(height: sizerSp(20)),
-          SvgPicture.asset('asset/line.svg', color: kcTextColor),
-          SizedBox(height: sizerSp(18)),
-          Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: sizerSp(15),
-              vertical: sizerSp(10),
-            ),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(sizerSp(20)),
-              color: const Color(0xffF1EDFD),
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                textWidget(
-                  'Forecast report',
-                  size: sizerSp(12),
-                  fontWeight: FontWeight.w400,
-                  color: const Color(0xff8862FC),
-                ),
-                SizedBox(width: sizerSp(8)),
-                SvgPicture.asset('asset/down.svg'),
-              ],
-            ),
-          ),
-          SizedBox(height: sizerSp(20)),
-          const TodayForecastReportWidget(),
-          SizedBox(height: sizerSp(20)),
-          const NextForecastReportWidget(),
-          SizedBox(height: sizerSp(15)),
-        ],
-      ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        const TodayForecastReportWidget(),
+        SizedBox(height: sizerSp(20)),
+        const NextForecastReportWidget(),
+        SizedBox(height: sizerSp(15)),
+      ],
     );
   }
 }
