@@ -127,13 +127,17 @@ class HomeWeatherDetailsWidget extends StatelessWidget {
               children: [
                 Container(
                   child: textWidget(
-                    'Lagos, Nigeria ~ ',
+                    '${getOneCallWeatherController.weatherModel?.value.timezone} ~ ',
                     size: sizerSp(16),
                     fontWeight: FontWeight.w400,
                   ),
                 ),
                 textWidget(
-                  '2:00 p.m',
+                  formatTime(
+                        getOneCallWeatherController
+                                .weatherModel?.value.current.dt ??
+                            0,
+                      ),
                   size: sizerSp(16),
                   fontWeight: FontWeight.w400,
                 ),

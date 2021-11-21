@@ -35,3 +35,10 @@ String formatDate(int timestamp) {
 
   return formatter;
 }
+
+String formatTime(int timestamp) {
+  final DateTime date = DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
+  String formatter = DateFormat("jm").format(date);
+
+  return formatter;
+}
