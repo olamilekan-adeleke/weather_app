@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:chopper/chopper.dart';
 
 class HeaderInterceptor implements RequestInterceptor {
@@ -6,7 +7,14 @@ class HeaderInterceptor implements RequestInterceptor {
 
   @override
   FutureOr<Request> onRequest(Request request) async {
-    Request newRequest = request.copyWith(parameters: {'appid': appID});
+    Request newRequest = request.copyWith(parameters: {
+      'appid': appID,
+      'units': 'metric',
+      ...request.parameters,
+    });
+
+    log(newRequest.url);
+    log(newRequest.parameters.toString());
 
     return newRequest;
   }
