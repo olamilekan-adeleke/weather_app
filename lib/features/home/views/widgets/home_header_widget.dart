@@ -4,8 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:weather_app/cores/components/custom_text_widget.dart';
 import 'package:weather_app/cores/utils/custom_sizer_utils.dart';
+import 'package:weather_app/features/home/controller/get_weather_controller.dart';
 import 'package:weather_app/features/home/controller/home_controller.dart';
-
 
 class HomeHeaderWidget extends StatelessWidget {
   const HomeHeaderWidget({
@@ -13,6 +13,8 @@ class HomeHeaderWidget extends StatelessWidget {
   }) : super(key: key);
 
   static final HomeController homeController = Get.find<HomeController>();
+  static final GetOneCallWeatherController getOneCallWeatherController =
+      Get.find<GetOneCallWeatherController>();
 
   @override
   Widget build(BuildContext context) {
@@ -33,16 +35,18 @@ class HomeHeaderWidget extends StatelessWidget {
             children: <Widget>[
               SvgPicture.asset('asset/location.svg'),
               SizedBox(width: sizerSp(8)),
-              textWidget(
-                'Lagos, Nigeria',
-                size: sizerSp(12),
-                fontWeight: FontWeight.w400,
-              ),
+              Obx(() {
+                return textWidget(
+                  getOneCallWeatherController.cityName.value,
+                  size: sizerSp(12),
+                  fontWeight: FontWeight.w400,
+                );
+              }),
             ],
           ),
         ),
         GestureDetector(
-          onTap: ()=> homeController.openNotifications(),
+          onTap: () => homeController.openNotifications(),
           child: Container(
             padding: EdgeInsets.symmetric(
               horizontal: sizerSp(10),
