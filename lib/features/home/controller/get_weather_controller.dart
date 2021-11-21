@@ -9,11 +9,14 @@ import 'package:weather_app/features/home/enum/controller_state_enum.dart';
 import 'package:weather_app/features/home/model/one_call_weather_moder.dart';
 import 'package:weather_app/features/home/service/reverse_geocoding_service.dart';
 import 'package:weather_app/features/home/service/weather_service.dart';
+import 'package:weather_app/features/notiification/controller/notifcation_controller.dart';
 
 class GetOneCallWeatherController extends GetxController {
   static final WeatherService _weatherService = Get.find<WeatherService>();
   static final ReverseGeocodingService _reverseGeocodingService =
       Get.find<ReverseGeocodingService>();
+  static final NotificationController notificationController =
+      Get.find<NotificationController>();
   final Rx<ControllerState> controllerState = ControllerState.init.obs;
   final RxString errorText = ''.obs;
   final RxString cityName = ''.obs;
@@ -38,17 +41,23 @@ class GetOneCallWeatherController extends GetxController {
         locationData.longitude!,
       );
 
-      log(result.bodyString);
+      // log(result.bodyString);
 
       if (result.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(result.bodyString);
         final Rx<WeatherModel> _weatherModel = WeatherModel.fromMap(data).obs;
         weatherModel = _weatherModel;
+
         cityName.value = await _reverseGeocodingService.getCityNameFromLatLng(
               _weatherModel.value.lat,
               _weatherModel.value.lon,
             ) ??
             '';
+
+        // save notification to local DB
+        await notificationController.saveNotifications(
+          _weatherModel.value.toMap(),
+        );
       }
 
       controllerState.value = ControllerState.success;

@@ -53,7 +53,7 @@ class WeatherModel {
       "timezone": timezone,
       "timezone_offset": timezoneOffset,
       "current": current.toMap(),
-      "minutely": List<dynamic>.from(minutely!.map((x) => x.toMap())),
+      // "minutely": List<dynamic>.from(minutely!.map((x) => x.toMap())),
       "hourly": List<dynamic>.from(hourly!.map((x) => x.toMap())),
       "daily": List<dynamic>.from(daily!.map((x) => x.toMap())),
     };
@@ -285,7 +285,7 @@ class Daily {
       moonrise: json["moonrise"],
       moonset: json["moonset"],
       moonPhase: json["moon_phase"].toDouble(),
-      temp: json["temp"] !=null ? Temp.fromMap(json["temp"]) : null,
+      temp: json["temp"] != null ? Temp.fromMap(json["temp"]) : null,
       // feelsLike: FeelsLike.fromMap(json["feels_like"]),
       pressure: json["pressure"],
       humidity: json["humidity"],

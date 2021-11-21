@@ -17,7 +17,9 @@ class NotificationController extends GetxController {
     controllerState.value = ControllerState.success;
   }
 
-  void saveNotifications(Map<String, dynamic> data) {}
+  Future<void> saveNotifications(Map<String, dynamic> data) async {
+    await localDatabaseService.saveNotificationData(data);
+  }
 
   Future<void> init() async {
     controllerState.value = ControllerState.busy;
