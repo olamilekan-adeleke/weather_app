@@ -68,6 +68,16 @@ class WeatherModel {
       "daily": List<dynamic>.from(daily!.map((x) => x.toMap())),
     };
   }
+
+  Map<String, dynamic> toMapForLocalDB() {
+    return {
+      "lat": lat,
+      "lon": lon,
+      "timezone": timezone,
+      "timezone_offset": timezoneOffset,
+      "current": current.toMap(),
+    };
+  }
 }
 
 class Current {
@@ -128,7 +138,7 @@ class Current {
       visibility: json["visibility"],
       windSpeed: json["wind_speed"].toDouble(),
       windDeg: json["wind_deg"],
-      windGust: json["wind_gust"].toDouble(),
+      windGust: (json["wind_gust"] ?? 0).toDouble(),
       weather: List<Weather>.from(
           json["weather"].map((x) => Weather.fromMap(Map.from(x)))),
       pop: (json["pop"] ?? 0).toDouble(),

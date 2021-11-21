@@ -2,7 +2,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 class LocalDatabaseService {
   static const boxName = 'notification';
-  static const boxKey = 'notifications_data';
+  static const boxKey = 'notifications';
 
   Future<void> openNotificationsBox() async {
     await Hive.openBox(boxName);

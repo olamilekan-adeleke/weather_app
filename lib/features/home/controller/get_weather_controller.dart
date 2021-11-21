@@ -56,7 +56,7 @@ class GetOneCallWeatherController extends GetxController {
 
         // save notification to local DB
         await notificationController.saveNotifications(
-          _weatherModel.value.toMap(),
+          _weatherModel.value.toMapForLocalDB(),
         );
       }
 
