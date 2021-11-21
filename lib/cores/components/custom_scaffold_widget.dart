@@ -1,3 +1,5 @@
+import 'package:weather_app/cores/constants/color.dart';
+
 import '../utils/custom_sizer_utils.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +12,7 @@ Widget scaffold({
   return SafeArea(
     child: Scaffold(
       appBar: appBar,
-      backgroundColor: const Color(0xff7047EB),
+      backgroundColor: kcPrimaryColor,
       body: Padding(
         padding: EdgeInsets.symmetric(
           horizontal: usePadding ? sizerSp(10.0) : 0,

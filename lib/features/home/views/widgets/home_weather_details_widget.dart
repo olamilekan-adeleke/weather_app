@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:weather_app/cores/components/custom_text_widget.dart';
+import 'package:weather_app/cores/components/shimmer_widget.dart';
 import 'package:weather_app/cores/utils/custom_sizer_utils.dart';
 import 'package:weather_app/features/enum/controller_state_enum.dart';
 import 'package:weather_app/features/home/controller/get_weather_controller.dart';
@@ -64,9 +65,15 @@ class HomeWeatherDetailsWidget extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Obx(() {
-                if (getOneCallWeatherController.controllerState.value ==
+                if (getOneCallWeatherController.controllerState.value !=
                     ControllerState.busy) {
-                  return CircularProgressIndicator();
+                  return Padding(
+                    padding: EdgeInsets.all(sizerSp(15)),
+                    child: shimmerRectangle(
+                      height: sizerSp(150),
+                      width: sizerSp(150),
+                    ),
+                  );
                 }
                 return textWidget(
                   '${getOneCallWeatherController.weatherModel?.value.current.temp?.round() ?? ''}',
