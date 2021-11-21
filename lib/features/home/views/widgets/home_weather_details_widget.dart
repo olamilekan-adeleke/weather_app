@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:weather_app/cores/components/custom_text_widget.dart';
 import 'package:weather_app/cores/utils/custom_sizer_utils.dart';
-
+import 'package:weather_app/features/enum/controller_state_enum.dart';
+import 'package:weather_app/features/home/controller/get_weather_controller.dart';
 
 class HomeWeatherDetailsWidget extends StatelessWidget {
   const HomeWeatherDetailsWidget({
     Key? key,
   }) : super(key: key);
+
+  static final GetOneCallWeatherController getOneCallWeatherController =
+      Get.find<GetOneCallWeatherController>();
 
   @override
   Widget build(BuildContext context) {
@@ -57,11 +63,17 @@ class HomeWeatherDetailsWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              textWidget(
-                '28',
-                size: sizerSp(154),
-                fontWeight: FontWeight.w500,
-              ),
+              Obx(() {
+                if (getOneCallWeatherController.controllerState.value ==
+                    ControllerState.busy) {
+                  return CircularProgressIndicator();
+                }
+                return textWidget(
+                  '${getOneCallWeatherController.weatherModel?.value.current.temp?.round() ?? ''}',
+                  size: sizerSp(154),
+                  fontWeight: FontWeight.w500,
+                );
+              }),
               textWidget(
                 '℃',
                 size: sizerSp(18),

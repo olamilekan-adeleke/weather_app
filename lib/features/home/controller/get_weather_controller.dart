@@ -16,12 +16,15 @@ class GetOneCallWeatherController extends GetxController {
 
   Future<void> getWeather() async {
     try {
+      controllerState.value = ControllerState.busy;
+
       final LocationData? locationData = await getCurrentUserLocation();
 
       if (locationData == null ||
           locationData.latitude == null ||
           locationData.longitude == null) {
         // show snack bar
+        controllerState.value = ControllerState.error;
         return;
       }
 
@@ -35,14 +38,20 @@ class GetOneCallWeatherController extends GetxController {
       if (result.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(result.bodyString);
         final Rx<WeatherModel> _weatherModel = WeatherModel.fromMap(data).obs;
-        weatherModel = weatherModel;
+        weatherModel = _weatherModel;
       }
+
+      controllerState.value = ControllerState.success;
     } on SocketException catch (e, s) {
       log(e.toString());
       log(s.toString());
+      errorText.value = e.toString();
+      controllerState.value = ControllerState.error;
     } catch (e, s) {
       log(e.toString());
       log(s.toString());
+      errorText.value = e.toString();
+      controllerState.value = ControllerState.error;
     }
   }
 
