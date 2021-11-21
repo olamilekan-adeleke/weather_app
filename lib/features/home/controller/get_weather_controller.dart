@@ -4,7 +4,8 @@ import 'dart:io';
 
 import 'package:get/get.dart';
 import 'package:location/location.dart';
-import 'package:weather_app/features/enum/controller_state_enum.dart';
+import 'package:weather_app/features/home/enum/controller_state_enum.dart';
+
 import 'package:weather_app/features/home/model/one_call_weather_moder.dart';
 import 'package:weather_app/features/home/service/weather_service.dart';
 
