@@ -32,16 +32,26 @@ class WeatherModel {
       lon: json["lon"].toDouble(),
       timezone: json["timezone"],
       timezoneOffset: json["timezone_offset"],
-      current: Current.fromMap(json["current"]),
+      current: Current.fromMap(Map<String, dynamic>.from(json["current"])),
       minutely: json["minutely"] != null
           ? List<Minutely>.from(
               json["minutely"].map((x) => Minutely.fromMap(x)))
           : null,
       hourly: json["hourly"] != null
-          ? List<Current>.from(json["hourly"].map((x) => Current.fromMap(x)))
+          ? List<Current>.from(
+              json["hourly"].map(
+                (x) => Current.fromMap(Map<String, dynamic>.from(x)),
+              ),
+            )
           : null,
       daily: json["daily"] != null
-          ? List<Daily>.from(json["daily"].map((x) => Daily.fromMap(x)))
+          ? List<Daily>.from(
+              json["daily"].map(
+                (x) => Daily.fromMap(
+                  Map<String, dynamic>.from(x),
+                ),
+              ),
+            )
           : null,
     );
   }
@@ -119,8 +129,8 @@ class Current {
       windSpeed: json["wind_speed"].toDouble(),
       windDeg: json["wind_deg"],
       windGust: json["wind_gust"].toDouble(),
-      weather:
-          List<Weather>.from(json["weather"].map((x) => Weather.fromMap(x))),
+      weather: List<Weather>.from(
+          json["weather"].map((x) => Weather.fromMap(Map.from(x)))),
       pop: (json["pop"] ?? 0).toDouble(),
       rain: json["rain"] == null ? null : Rain.fromMap(json["rain"]),
     );

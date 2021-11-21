@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:weather_app/features/home/enum/controller_state_enum.dart';
 import 'package:weather_app/features/home/model/one_call_weather_moder.dart';
 import 'package:weather_app/features/notiification/service/local_database_service.dart';
@@ -10,10 +13,17 @@ class NotificationController extends GetxController {
   final RxList<WeatherModel> notifications = <WeatherModel>[].obs;
 
   Future<void> getNotifications() async {
-    final List<Map<String, dynamic>> data =
-        await localDatabaseService.getNotificationData();
+    localDatabaseService.notificationDataStream().listen((BoxEvent event) {
+      log(event.toString());
+      final List<dynamic> data = List<dynamic>.from(event.value ?? []);
 
-    notifications.value = data.map((e) => WeatherModel.fromMap(e)).toList();
+      List<Map<String, dynamic>> result =
+          data.map((e) => Map<String, dynamic>.from(e)).toList();
+
+      notifications.value = result.map((e) => WeatherModel.fromMap(e)).toList();
+      log('${result.length} data save');
+    });
+
     controllerState.value = ControllerState.success;
   }
 
