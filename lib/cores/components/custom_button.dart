@@ -125,7 +125,7 @@ class CustomButton extends StatelessWidget {
                 ),
           backgroundColor: busy
               ? MaterialStateProperty.all(kcGrey100)
-              : MaterialStateProperty.all(color ?? kcPrimaryColorTwo),
+              : MaterialStateProperty.all(color ?? kcPrimaryColor),
         ),
         child: child,
       ),

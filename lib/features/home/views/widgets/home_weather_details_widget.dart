@@ -35,75 +35,102 @@ class HomeWeatherDetailsWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SvgPicture.asset(
-                'asset/sunny.svg',
-                width: sizerSp(78),
-                height: sizerSp(48),
-              ),
-              SizedBox(width: sizerSp(8)),
-              Column(
-                children: <Widget>[
-                  textWidget(
-                    'Today',
-                    size: sizerSp(24),
-                    fontWeight: FontWeight.w500,
-                  ),
-                  textWidget(
-                    'Mon, 26 Apr',
-                    size: sizerSp(12),
-                    fontWeight: FontWeight.w500,
-                  ),
-                ],
-              ),
-            ],
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Obx(() {
-                if (getOneCallWeatherController.controllerState.value !=
-                    ControllerState.busy) {
-                  return Padding(
-                    padding: EdgeInsets.all(sizerSp(15)),
-                    child: shimmerRectangle(
-                      height: sizerSp(150),
-                      width: sizerSp(150),
+          Obx(() {
+            if (getOneCallWeatherController.controllerState.value ==
+                ControllerState.busy) {
+              return Padding(
+                padding: EdgeInsets.all(sizerSp(15)),
+                child: shimmerRectangle(
+                  height: sizerSp(40),
+                  width: sizerSp(150),
+                ),
+              );
+            }
+
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SvgPicture.asset(
+                  'asset/sunny.svg',
+                  width: sizerSp(78),
+                  height: sizerSp(48),
+                ),
+                SizedBox(width: sizerSp(8)),
+                Column(
+                  children: <Widget>[
+                    textWidget(
+                      'Today',
+                      size: sizerSp(24),
+                      fontWeight: FontWeight.w500,
                     ),
-                  );
-                }
-                return textWidget(
+                    textWidget(
+                      'Mon, 26 Apr',
+                      size: sizerSp(12),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ],
+                ),
+              ],
+            );
+          }),
+          Obx(() {
+            if (getOneCallWeatherController.controllerState.value ==
+                ControllerState.busy) {
+              return Padding(
+                padding: EdgeInsets.all(sizerSp(15)),
+                child: shimmerRectangle(
+                  height: sizerSp(130),
+                  width: sizerSp(150),
+                ),
+              );
+            }
+            return Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                textWidget(
                   '${getOneCallWeatherController.weatherModel?.value.current.temp?.round() ?? ''}',
                   size: sizerSp(154),
                   fontWeight: FontWeight.w500,
-                );
-              }),
-              textWidget(
-                '℃',
-                size: sizerSp(18),
-                fontWeight: FontWeight.w400,
-              ),
-            ],
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              textWidget(
-                'Lagos, Nigeria ~ ',
-                size: sizerSp(16),
-                fontWeight: FontWeight.w400,
-              ),
-              textWidget(
-                '2:00 p.m',
-                size: sizerSp(16),
-                fontWeight: FontWeight.w400,
-              ),
-            ],
-          ),
+                ),
+                textWidget(
+                  '℃',
+                  size: sizerSp(18),
+                  fontWeight: FontWeight.w400,
+                ),
+              ],
+            );
+          }),
+          Obx(() {
+            if (getOneCallWeatherController.controllerState.value ==
+                ControllerState.busy) {
+              return Padding(
+                padding: EdgeInsets.all(sizerSp(15)),
+                child: shimmerRectangle(
+                  height: sizerSp(10),
+                  width: sizerSp(160),
+                ),
+              );
+            }
+            return Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  child: textWidget(
+                    'Lagos, Nigeria ~ ',
+                    size: sizerSp(16),
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                textWidget(
+                  '2:00 p.m',
+                  size: sizerSp(16),
+                  fontWeight: FontWeight.w400,
+                ),
+              ],
+            );
+          }),
         ],
       ),
     );

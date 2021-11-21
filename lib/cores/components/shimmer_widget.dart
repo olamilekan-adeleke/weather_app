@@ -21,12 +21,12 @@ class CustomShimmerWidget extends StatelessWidget {
 
 Widget shimmerRectangle({double? height, double? width}) {
   return Shimmer.fromColors(
-    baseColor: Colors.grey.shade100,
-    highlightColor: Colors.grey.shade200,
+    baseColor: Colors.white54,
+    highlightColor: kcPrimaryColor, //kcPrimaryColor.withOpacity(.5),
     child: Container(
       height: height ?? sizerSp(40),
       width: width ?? double.infinity,
-      decoration: const BoxDecoration(color: kcGrey100),
+      decoration: BoxDecoration(color: Colors.grey.shade100),
     ),
   );
 }
