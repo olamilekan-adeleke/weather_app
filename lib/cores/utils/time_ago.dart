@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 String displayTimeAgo(
   String dateString, {
   bool numericDates = false,
@@ -25,4 +27,11 @@ String displayTimeAgo(
   } else {
     return '${date.hour < 10 ? '0${date.hour}' : date.hour}:${date.minute < 10 ? '0${date.minute}' : date.minute}';
   }
+}
+
+String formatDate(int timestamp) {
+  final DateTime date = DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
+  String formatter = DateFormat("MMMEd").format(date);
+
+  return formatter;
 }

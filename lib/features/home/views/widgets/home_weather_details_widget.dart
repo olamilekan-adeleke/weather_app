@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -6,6 +8,7 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:weather_app/cores/components/custom_text_widget.dart';
 import 'package:weather_app/cores/components/shimmer_widget.dart';
 import 'package:weather_app/cores/utils/custom_sizer_utils.dart';
+import 'package:weather_app/cores/utils/time_ago.dart';
 import 'package:weather_app/features/home/controller/get_weather_controller.dart';
 import 'package:weather_app/features/home/enum/controller_state_enum.dart';
 
@@ -47,6 +50,8 @@ class HomeWeatherDetailsWidget extends StatelessWidget {
               );
             }
 
+            log('${getOneCallWeatherController.weatherModel?.value.current.dt}');
+
             return Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -64,7 +69,11 @@ class HomeWeatherDetailsWidget extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                     textWidget(
-                      'Mon, 26 Apr',
+                      formatDate(
+                        getOneCallWeatherController
+                                .weatherModel?.value.current.dt ??
+                            0,
+                      ), //'Mon, 26 Apr',
                       size: sizerSp(12),
                       fontWeight: FontWeight.w500,
                     ),
