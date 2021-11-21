@@ -34,7 +34,7 @@ class NextForecastReportWidget extends StatelessWidget {
               color: kcTextColor,
             ),
             CustomButton(
-              text: 'Five Days',
+              text: 'Seven Days',
               onTap: () {},
               color: const Color(0xff8862FC),
               height: sizerSp(36),
