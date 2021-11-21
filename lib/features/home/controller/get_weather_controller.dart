@@ -12,6 +12,7 @@ class GetOneCallWeatherController extends GetxController {
   static final WeatherService _weatherService = Get.find<WeatherService>();
   final Rx<ControllerState> controllerState = ControllerState.init.obs;
   final RxString errorText = ''.obs;
+  Rx<WeatherModel>? weatherModel;
 
   Future<void> getWeather() async {
     try {
@@ -33,7 +34,8 @@ class GetOneCallWeatherController extends GetxController {
 
       if (result.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(result.bodyString);
-        final WeatherModel weatherModel = WeatherModel.fromMap(data);
+        final Rx<WeatherModel> _weatherModel = WeatherModel.fromMap(data).obs;
+        weatherModel = weatherModel;
       }
     } on SocketException catch (e, s) {
       log(e.toString());

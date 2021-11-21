@@ -17,9 +17,9 @@ class WeatherModel {
   final String timezone;
   final int timezoneOffset;
   final Current current;
-  final List<Minutely> minutely;
-  final List<Current> hourly;
-  final List<Daily> daily;
+  final List<Minutely>? minutely;
+  final List<Current>? hourly;
+  final List<Daily>? daily;
 
   factory WeatherModel.fromJson(String str) =>
       WeatherModel.fromMap(json.decode(str));
@@ -33,10 +33,16 @@ class WeatherModel {
       timezone: json["timezone"],
       timezoneOffset: json["timezone_offset"],
       current: Current.fromMap(json["current"]),
-      minutely:
-          List<Minutely>.from(json["minutely"].map((x) => Minutely.fromMap(x))),
-      hourly: List<Current>.from(json["hourly"].map((x) => Current.fromMap(x))),
-      daily: List<Daily>.from(json["daily"].map((x) => Daily.fromMap(x))),
+      minutely: json["minutely"] != null
+          ? List<Minutely>.from(
+              json["minutely"].map((x) => Minutely.fromMap(x)))
+          : null,
+      hourly: json["hourly"] != null
+          ? List<Current>.from(json["hourly"].map((x) => Current.fromMap(x)))
+          : null,
+      daily: json["daily"] != null
+          ? List<Daily>.from(json["daily"].map((x) => Daily.fromMap(x)))
+          : null,
     );
   }
 
@@ -47,9 +53,9 @@ class WeatherModel {
       "timezone": timezone,
       "timezone_offset": timezoneOffset,
       "current": current.toMap(),
-      "minutely": List<dynamic>.from(minutely.map((x) => x.toMap())),
-      "hourly": List<dynamic>.from(hourly.map((x) => x.toMap())),
-      "daily": List<dynamic>.from(daily.map((x) => x.toMap())),
+      "minutely": List<dynamic>.from(minutely!.map((x) => x.toMap())),
+      "hourly": List<dynamic>.from(hourly!.map((x) => x.toMap())),
+      "daily": List<dynamic>.from(daily!.map((x) => x.toMap())),
     };
   }
 }
@@ -75,22 +81,22 @@ class Current {
     required this.rain,
   });
 
-  final int dt;
-  final int sunrise;
-  final int sunset;
-  final double temp;
-  final double feelsLike;
-  final int pressure;
-  final int humidity;
-  final double dewPoint;
-  final double uvi;
-  final int clouds;
-  final int visibility;
-  final double windSpeed;
-  final int windDeg;
-  final double windGust;
-  final List<Weather> weather;
-  final double pop;
+  final int? dt;
+  final int? sunrise;
+  final int? sunset;
+  final double? temp;
+  final double? feelsLike;
+  final int? pressure;
+  final int? humidity;
+  final double? dewPoint;
+  final double? uvi;
+  final int? clouds;
+  final int? visibility;
+  final double? windSpeed;
+  final int? windDeg;
+  final double? windGust;
+  final List<Weather>? weather;
+  final double? pop;
   final Rain? rain;
 
   factory Current.fromJson(String str) => Current.fromMap(json.decode(str));
@@ -135,7 +141,7 @@ class Current {
         "wind_speed": windSpeed,
         "wind_deg": windDeg,
         "wind_gust": windGust,
-        "weather": List<dynamic>.from(weather.map((x) => x.toMap())),
+        "weather": List<dynamic>.from(weather!.map((x) => x.toMap())),
         "pop": pop,
         "rain": rain?.toMap(),
       };
@@ -146,7 +152,7 @@ class Rain {
     required this.the1H,
   });
 
-  final double the1H;
+  final double? the1H;
 
   factory Rain.fromJson(String str) => Rain.fromMap(json.decode(str));
 
@@ -173,10 +179,10 @@ class Weather {
     required this.icon,
   });
 
-  final int id;
+  final int? id;
   final Main? main;
   final Description? description;
-  final String icon;
+  final String? icon;
 
   factory Weather.fromJson(String str) => Weather.fromMap(json.decode(str));
 
@@ -233,7 +239,7 @@ class Daily {
     required this.moonset,
     required this.moonPhase,
     required this.temp,
-    required this.feelsLike,
+    // required this.feelsLike,
     required this.pressure,
     required this.humidity,
     required this.dewPoint,
@@ -247,25 +253,25 @@ class Daily {
     required this.uvi,
   });
 
-  final int dt;
-  final int sunrise;
-  final int sunset;
-  final int moonrise;
-  final int moonset;
-  final double moonPhase;
-  final Temp temp;
-  final FeelsLike feelsLike;
-  final int pressure;
-  final int humidity;
-  final double dewPoint;
-  final double windSpeed;
-  final int windDeg;
-  final double windGust;
-  final List<Weather> weather;
-  final int clouds;
-  final double pop;
-  final double rain;
-  final double uvi;
+  final int? dt;
+  final int? sunrise;
+  final int? sunset;
+  final int? moonrise;
+  final int? moonset;
+  final double? moonPhase;
+  final Temp? temp;
+  // final FeelsLike? feelsLike;
+  final int? pressure;
+  final int? humidity;
+  final double? dewPoint;
+  final double? windSpeed;
+  final int? windDeg;
+  final double? windGust;
+  final List<Weather>? weather;
+  final int? clouds;
+  final double? pop;
+  final double? rain;
+  final double? uvi;
 
   factory Daily.fromJson(String str) => Daily.fromMap(json.decode(str));
 
@@ -279,8 +285,8 @@ class Daily {
       moonrise: json["moonrise"],
       moonset: json["moonset"],
       moonPhase: json["moon_phase"].toDouble(),
-      temp: Temp.fromMap(json["temp"]),
-      feelsLike: FeelsLike.fromMap(json["feels_like"]),
+      temp: json["temp"] !=null ? Temp.fromMap(json["temp"]) : null,
+      // feelsLike: FeelsLike.fromMap(json["feels_like"]),
       pressure: json["pressure"],
       humidity: json["humidity"],
       dewPoint: json["dew_point"].toDouble(),
@@ -304,15 +310,15 @@ class Daily {
       "moonrise": moonrise,
       "moonset": moonset,
       "moon_phase": moonPhase,
-      "temp": temp.toMap(),
-      "feels_like": feelsLike.toMap(),
+      "temp": temp?.toMap(),
+      // "feels_like": feelsLike?.toMap(),
       "pressure": pressure,
       "humidity": humidity,
       "dew_point": dewPoint,
       "wind_speed": windSpeed,
       "wind_deg": windDeg,
       "wind_gust": windGust,
-      "weather": List<dynamic>.from(weather.map((x) => x.toMap())),
+      "weather": List<dynamic>.from(weather!.map((x) => x.toMap())),
       "clouds": clouds,
       "pop": pop,
       "rain": rain,
@@ -367,12 +373,12 @@ class Temp {
     required this.morn,
   });
 
-  final double day;
-  final double min;
-  final double max;
-  final double night;
-  final double eve;
-  final double morn;
+  final double? day;
+  final double? min;
+  final double? max;
+  final double? night;
+  final double? eve;
+  final double? morn;
 
   factory Temp.fromJson(String str) => Temp.fromMap(json.decode(str));
 
