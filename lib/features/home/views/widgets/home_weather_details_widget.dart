@@ -127,17 +127,17 @@ class HomeWeatherDetailsWidget extends StatelessWidget {
               children: [
                 Container(
                   child: textWidget(
-                    '${getOneCallWeatherController.weatherModel?.value.timezone} ~ ',
+                    '${getOneCallWeatherController.cityName.value} ~ ',
                     size: sizerSp(16),
                     fontWeight: FontWeight.w400,
                   ),
                 ),
                 textWidget(
                   formatTime(
-                        getOneCallWeatherController
-                                .weatherModel?.value.current.dt ??
-                            0,
-                      ),
+                    getOneCallWeatherController
+                            .weatherModel?.value.current.dt ??
+                        0,
+                  ),
                   size: sizerSp(16),
                   fontWeight: FontWeight.w400,
                 ),
