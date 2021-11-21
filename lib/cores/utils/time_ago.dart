@@ -36,6 +36,13 @@ String formatDate(int timestamp) {
   return formatter;
 }
 
+String formatDateWithoutDay(int timestamp) {
+  final DateTime date = DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
+  String formatter = DateFormat("MMMEd").format(date);
+
+  return formatter;
+}
+
 String formatTime(int timestamp) {
   final DateTime date = DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
   String formatter = DateFormat("jm").format(date);

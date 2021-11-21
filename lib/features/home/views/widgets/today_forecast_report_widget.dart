@@ -46,7 +46,9 @@ class TodayForecastReportWidget extends StatelessWidget {
               return ListView.builder(
                 physics: const BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
-                itemCount: 20,
+                itemCount: getOneCallWeatherController
+                        .weatherModel!.value.hourly?.length ??
+                    0,
                 itemBuilder: (_, int index) {
                   final Current current = getOneCallWeatherController
                       .weatherModel!.value.hourly![index];
@@ -79,9 +81,7 @@ class TodayForecastReportWidget extends StatelessWidget {
                           width: sizerSp(40),
                         ),
                         textWidget(
-                          formatTime(
-                            current.dt ?? 0,
-                          ),
+                          formatTime(current.dt ?? 0),
                           size: sizerSp(12),
                           fontWeight: FontWeight.w600,
                           color: kcTextColor,
