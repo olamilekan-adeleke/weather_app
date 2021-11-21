@@ -1,10 +1,10 @@
 import 'package:intl/intl.dart';
 
 String displayTimeAgo(
-  String dateString, {
+  int dt, {
   bool numericDates = false,
 }) {
-  DateTime date = DateTime.parse(dateString);
+  final DateTime date = DateTime.fromMillisecondsSinceEpoch(dt * 1000);
   final date2 = DateTime.now();
   final difference = date2.difference(date);
 
@@ -24,6 +24,16 @@ String displayTimeAgo(
     return '${difference.inDays} days ago';
   } else if (difference.inDays >= 1) {
     return (numericDates) ? '1 day ago' : 'Yesterday';
+  } else if (difference.inHours >= 2) {
+    return '${difference.inHours} hours ago';
+  } else if (difference.inHours >= 1) {
+    return (numericDates) ? '1 hour ago' : 'An hour ago';
+  } else if (difference.inMinutes >= 2) {
+    return '${difference.inMinutes} minutes ago';
+  } else if (difference.inMinutes >= 1) {
+    return (numericDates) ? '1 minute ago' : 'A minute ago';
+  } else if (difference.inSeconds >= 3) {
+    return '${difference.inSeconds} seconds ago';
   } else {
     return '${date.hour < 10 ? '0${date.hour}' : date.hour}:${date.minute < 10 ? '0${date.minute}' : date.minute}';
   }

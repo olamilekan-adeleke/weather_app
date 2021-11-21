@@ -8,7 +8,7 @@ class CustomBottomModalService {
       child,
       isDismissible: true,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      enableDrag: false,
+      enableDrag: true,
       backgroundColor: white,
       isScrollControlled: isScrollControlled,
     );

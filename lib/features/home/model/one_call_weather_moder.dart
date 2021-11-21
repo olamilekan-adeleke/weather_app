@@ -200,8 +200,8 @@ class Weather {
   });
 
   final int? id;
-  final Main? main;
-  final Description? description;
+  final String? main;
+  final String? description;
   final String? icon;
 
   factory Weather.fromJson(String str) => Weather.fromMap(json.decode(str));
@@ -211,18 +211,20 @@ class Weather {
   factory Weather.fromMap(Map<String, dynamic> json) {
     return Weather(
       id: json["id"],
-      main: mainValues.map[json["main"]],
-      description: descriptionValues.map[json["description"]],
+      main: json["main"],
+      description: json["description"],
       icon: json["icon"],
     );
   }
 
-  Map<String, dynamic> toMap() => {
-        "id": id,
-        "main": mainValues.reverse[main],
-        "description": descriptionValues.reverse[description],
-        "icon": icon,
-      };
+  Map<String, dynamic> toMap() {
+    return {
+      "id": id,
+      "main": main,
+      "description": description,
+      "icon": icon,
+    };
+  }
 }
 
 enum Description {
