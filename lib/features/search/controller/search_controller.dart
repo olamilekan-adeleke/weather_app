@@ -35,7 +35,7 @@ class SearchController extends GetxController {
         final Map<String, dynamic> data = json.decode(result.bodyString);
 
         // set cityName
-        final String cityName = place;
+        final String cityName = '$place, NG';
 
         // add city name to map
         data['cityName'] = cityName;

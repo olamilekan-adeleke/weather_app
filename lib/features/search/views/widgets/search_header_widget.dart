@@ -7,8 +7,6 @@ import 'package:get/get.dart';
 import 'package:weather_app/cores/components/custom_text_widget.dart';
 import 'package:weather_app/cores/components/shimmer_widget.dart';
 import 'package:weather_app/cores/utils/custom_sizer_utils.dart';
-import 'package:weather_app/features/home/controller/get_weather_controller.dart';
-import 'package:weather_app/features/home/controller/home_controller.dart';
 import 'package:weather_app/features/home/enum/controller_state_enum.dart';
 import 'package:weather_app/features/search/controller/search_controller.dart';
 
