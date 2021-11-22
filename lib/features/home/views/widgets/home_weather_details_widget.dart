@@ -127,7 +127,7 @@ class HomeWeatherDetailsWidget extends StatelessWidget {
               children: [
                 Container(
                   child: textWidget(
-                    '${getOneCallWeatherController.cityName.value} ~ ',
+                    '${getOneCallWeatherController.weatherModel?.value.cityName} ~ ',
                     size: sizerSp(16),
                     fontWeight: FontWeight.w400,
                   ),

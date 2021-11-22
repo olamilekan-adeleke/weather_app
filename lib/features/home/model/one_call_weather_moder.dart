@@ -10,6 +10,7 @@ class WeatherModel {
     required this.minutely,
     required this.hourly,
     required this.daily,
+    this.cityName,
   });
 
   final double lat;
@@ -20,6 +21,7 @@ class WeatherModel {
   final List<Minutely>? minutely;
   final List<Current>? hourly;
   final List<Daily>? daily;
+  final String? cityName;
 
   factory WeatherModel.fromJson(String str) =>
       WeatherModel.fromMap(json.decode(str));
@@ -31,6 +33,7 @@ class WeatherModel {
       lat: json["lat"].toDouble(),
       lon: json["lon"].toDouble(),
       timezone: json["timezone"],
+      cityName: json["cityName"],
       timezoneOffset: json["timezone_offset"],
       current: Current.fromMap(Map<String, dynamic>.from(json["current"])),
       minutely: json["minutely"] != null
@@ -76,6 +79,7 @@ class WeatherModel {
       "timezone": timezone,
       "timezone_offset": timezoneOffset,
       "current": current.toMap(),
+      "cityName": cityName,
     };
   }
 }

@@ -37,7 +37,7 @@ class HomeHeaderWidget extends StatelessWidget {
               SizedBox(width: sizerSp(8)),
               Obx(() {
                 return textWidget(
-                  getOneCallWeatherController.cityName.value,
+                  getOneCallWeatherController.weatherModel?.value.cityName ?? '',
                   size: sizerSp(12),
                   fontWeight: FontWeight.w400,
                 );

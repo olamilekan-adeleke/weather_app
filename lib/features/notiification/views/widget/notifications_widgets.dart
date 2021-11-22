@@ -47,7 +47,7 @@ class NotificationWidget extends StatelessWidget {
                       ),
                       SizedBox(height: sizerSp(5)),
                       textWidget(
-                        'Its ${notification.current.temp?.round()} ℃, A ${notification.current.weather?.first.description} day in your location ' *
+                        'Its ${notification.current.temp?.round()} ℃, ${notification.current.weather?.first.description} day in your location ' *
                             3,
                         size: sizerSp(14),
                         fontWeight: FontWeight.w400,

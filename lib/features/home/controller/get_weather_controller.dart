@@ -19,7 +19,6 @@ class GetOneCallWeatherController extends GetxController {
       Get.find<NotificationController>();
   final Rx<ControllerState> controllerState = ControllerState.init.obs;
   final RxString errorText = ''.obs;
-  final RxString cityName = ''.obs;
   Rx<WeatherModel>? weatherModel;
 
   Future<void> getWeather() async {
@@ -45,19 +44,24 @@ class GetOneCallWeatherController extends GetxController {
 
       if (result.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(result.bodyString);
+
+        // get cityName
+        final String cityName =
+            await _reverseGeocodingService.getCityNameFromLatLng(
+                  locationData.latitude!,
+                  locationData.longitude!,
+                ) ??
+                '';
+
+        // add city name to map
+        data['cityName'] = cityName;
+
         final Rx<WeatherModel> _weatherModel = WeatherModel.fromMap(data).obs;
         weatherModel = _weatherModel;
 
-        cityName.value = await _reverseGeocodingService.getCityNameFromLatLng(
-              _weatherModel.value.lat,
-              _weatherModel.value.lon,
-            ) ??
-            '';
-
         // save notification to local DB
-        await notificationController.saveNotifications(
-          _weatherModel.value.toMapForLocalDB(),
-        );
+        await notificationController
+            .saveNotifications(_weatherModel.value.toMapForLocalDB());
       }
 
       controllerState.value = ControllerState.success;
