@@ -27,12 +27,13 @@ class SearchController extends GetxController {
     try {
       controllerState.value = ControllerState.busy;
 
-      var result =
-          await _weatherService.getCurrentWeatherByPlaceName('${place.toLowerCase()}, ng');
+      var result = await _weatherService
+          .getCurrentWeatherByPlaceName('${place.toLowerCase()}, ng');
 
       log(result.bodyString);
 
-      if (result.statusCode == 200) {
+      if (result.statusCode == 200 &&
+          json.decode(result.bodyString)['cod'] == 200) {
         final Map<String, dynamic> data = json.decode(result.bodyString);
 
         // set cityName
@@ -41,12 +42,15 @@ class SearchController extends GetxController {
         // add city name to map
         data['cityName'] = cityName;
 
-        final Rx<PlaceWeatherModel> _weatherModel = PlaceWeatherModel.fromMap(data).obs;
+        final Rx<PlaceWeatherModel> _weatherModel =
+            PlaceWeatherModel.fromMap(data).obs;
         weatherModel = _weatherModel;
 
         // set isInCelsius to true
         isInCelsius.value = true;
         temp.value = _weatherModel.value.main?.temp ?? 0;
+      } else {
+        throw 'Opps, It looks like something went wrong \n City not found!';
       }
 
       controllerState.value = ControllerState.success;
