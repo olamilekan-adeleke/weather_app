@@ -17,7 +17,7 @@ class GetOneCallWeatherController extends GetxController {
       Get.find<ReverseGeocodingService>();
   static final NotificationController notificationController =
       Get.find<NotificationController>();
-  final Rx<ControllerState> controllerState = ControllerState.init.obs;
+  final Rx<ControllerState> controllerState = ControllerState.busy.obs;
   final RxString errorText = ''.obs;
   final RxDouble temp = 0.0.obs;
   Rx<WeatherModel>? weatherModel;
