@@ -12,14 +12,11 @@ import 'package:weather_app/features/home/controller/home_controller.dart';
 import 'package:weather_app/features/home/enum/controller_state_enum.dart';
 import 'package:weather_app/features/search/controller/search_controller.dart';
 
-class HomeHeaderWidget extends StatelessWidget {
-  const HomeHeaderWidget({
+class SearchHeaderWidget extends StatelessWidget {
+  const SearchHeaderWidget({
     Key? key,
   }) : super(key: key);
 
-  static final HomeController homeController = Get.find<HomeController>();
-  static final GetOneCallWeatherController getOneCallWeatherController =
-      Get.find<GetOneCallWeatherController>();
   static final SearchController searchController = Get.find<SearchController>();
 
   @override
@@ -43,7 +40,7 @@ class HomeHeaderWidget extends StatelessWidget {
               SizedBox(width: sizerSp(8)),
               PopupMenuButton(
                 child: Obx(() {
-                  if (getOneCallWeatherController.controllerState.value ==
+                  if (searchController.controllerState.value ==
                       ControllerState.busy) {
                     return shimmerRectangle(
                       height: sizerSp(10),
@@ -52,8 +49,7 @@ class HomeHeaderWidget extends StatelessWidget {
                   }
 
                   return textWidget(
-                    getOneCallWeatherController.weatherModel?.value.cityName ??
-                        '',
+                    searchController.weatherModel?.value.cityName ?? '',
                     size: sizerSp(12),
                     fontWeight: FontWeight.w400,
                   );
@@ -69,25 +65,6 @@ class HomeHeaderWidget extends StatelessWidget {
                 onSelected: (val) => searchController.search(val.toString()),
               ),
             ],
-          ),
-        ),
-        GestureDetector(
-          onTap: () => homeController.openNotifications(),
-          child: Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: sizerSp(10),
-              vertical: sizerSp(10),
-            ),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(sizerSp(10)),
-              color: const Color(0xff7E59Ed),
-            ),
-            alignment: Alignment.center,
-            child: SvgPicture.asset(
-              'asset/bell.svg',
-              height: sizerSp(20),
-              width: sizerSp(20),
-            ),
           ),
         ),
       ],

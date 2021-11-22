@@ -12,7 +12,7 @@ abstract class WeatherService extends ChopperService {
   );
 
   @Get(path: '/onecall')
-  Future<Response> getCurrentWeatherByPlaceName(@Query('q') double query);
+  Future<Response> getCurrentWeatherByPlaceName(@Query('q') String query);
 
   static WeatherService create() {
     final client = ChopperClient(
