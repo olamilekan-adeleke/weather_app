@@ -11,8 +11,8 @@ import 'package:weather_app/cores/utils/time_ago.dart';
 import 'package:weather_app/features/home/enum/controller_state_enum.dart';
 import 'package:weather_app/features/search/controller/search_controller.dart';
 
-class HomeWeatherDetailsWidget extends StatelessWidget {
-  const HomeWeatherDetailsWidget({
+class SearchWeatherDetailsWidget extends StatelessWidget {
+  const SearchWeatherDetailsWidget({
     Key? key,
   }) : super(key: key);
 
