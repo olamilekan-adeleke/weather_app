@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:weather_app/cores/components/custom_text_widget.dart';
 import 'package:weather_app/cores/components/shimmer_widget.dart';
+import 'package:weather_app/cores/constants/color.dart';
 import 'package:weather_app/cores/utils/custom_sizer_utils.dart';
 import 'package:weather_app/features/home/enum/controller_state_enum.dart';
 import 'package:weather_app/features/search/controller/search_controller.dart';
@@ -20,8 +21,9 @@ class SearchHeaderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
+        const Icon(Icons.arrow_back_ios_new, color: white),
+        SizedBox(width: sizerSp(5)),
         Container(
           padding: EdgeInsets.symmetric(
             horizontal: sizerSp(15),
@@ -36,32 +38,21 @@ class SearchHeaderWidget extends StatelessWidget {
             children: <Widget>[
               SvgPicture.asset('asset/location.svg'),
               SizedBox(width: sizerSp(8)),
-              PopupMenuButton(
-                child: Obx(() {
-                  if (searchController.controllerState.value ==
-                      ControllerState.busy) {
-                    return shimmerRectangle(
-                      height: sizerSp(10),
-                      width: sizerSp(45),
-                    );
-                  }
-
-                  return textWidget(
-                    searchController.weatherModel?.value.cityName ?? '',
-                    size: sizerSp(12),
-                    fontWeight: FontWeight.w400,
+              Obx(() {
+                if (searchController.controllerState.value ==
+                    ControllerState.busy) {
+                  return shimmerRectangle(
+                    height: sizerSp(10),
+                    width: sizerSp(45),
                   );
-                }),
-                itemBuilder: (_) {
-                  return stateList.map((String e) {
-                    return PopupMenuItem(
-                      child: Text(e),
-                      value: e,
-                    );
-                  }).toList();
-                },
-                onSelected: (val) => searchController.search(val.toString()),
-              ),
+                }
+
+                return textWidget(
+                  searchController.weatherModel?.value.cityName ?? '',
+                  size: sizerSp(12),
+                  fontWeight: FontWeight.w400,
+                );
+              }),
             ],
           ),
         ),
