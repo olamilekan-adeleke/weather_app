@@ -78,8 +78,8 @@ class NextForecastReportWidget extends StatelessWidget {
                           fontWeight: FontWeight.w400,
                           color: kcTextColor,
                         ),
-                        SvgPicture.asset(
-                          'asset/sunny.svg',
+                        Image.asset(
+                          'asset/${daily.weather?.first.icon}.png',
                           height: sizerSp(40),
                           width: sizerSp(40),
                         ),
