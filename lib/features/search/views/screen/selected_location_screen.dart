@@ -8,12 +8,12 @@ import 'package:weather_app/features/search/views/widgets/search_header_widget.d
 class SelectedLocationScreen extends StatelessWidget {
   const SelectedLocationScreen({Key? key}) : super(key: key);
 
-  static final SearchController searchController = Get.find<SearchController>();
+
 
   @override
   Widget build(BuildContext context) {
     return scaffold(
-      body: ListView(
+      body:  ListView(
         shrinkWrap: true,
         children: [
           SizedBox(

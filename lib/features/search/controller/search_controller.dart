@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:weather_app/features/home/enum/controller_state_enum.dart';
 import 'package:weather_app/features/home/model/one_call_weather_moder.dart';
 import 'package:weather_app/features/home/service/weather_service.dart';
+import 'package:weather_app/features/search/model/place_weather_model.dart';
 import 'package:weather_app/features/search/views/screen/selected_location_screen.dart';
 
 class SearchController extends GetxController {
@@ -13,7 +14,7 @@ class SearchController extends GetxController {
   final Rx<ControllerState> controllerState = ControllerState.init.obs;
   final RxString errorText = ''.obs;
   final RxDouble temp = 0.0.obs;
-  Rx<WeatherModel>? weatherModel;
+  Rx<PlaceWeatherModel>? weatherModel;
   final RxBool isInCelsius = true.obs;
 
   Future<void> search(String place) async {
@@ -27,7 +28,7 @@ class SearchController extends GetxController {
       controllerState.value = ControllerState.busy;
 
       var result =
-          await _weatherService.getCurrentWeatherByPlaceName('$place, ng');
+          await _weatherService.getCurrentWeatherByPlaceName('${place.toLowerCase()}, ng');
 
       log(result.bodyString);
 
@@ -40,12 +41,12 @@ class SearchController extends GetxController {
         // add city name to map
         data['cityName'] = cityName;
 
-        final Rx<WeatherModel> _weatherModel = WeatherModel.fromMap(data).obs;
+        final Rx<PlaceWeatherModel> _weatherModel = PlaceWeatherModel.fromMap(data).obs;
         weatherModel = _weatherModel;
 
         // set isInCelsius to true
         isInCelsius.value = true;
-        temp.value = _weatherModel.value.current.temp ?? 0;
+        temp.value = _weatherModel.value.main?.temp ?? 0;
       }
 
       controllerState.value = ControllerState.success;
