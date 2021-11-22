@@ -29,7 +29,7 @@ class SelectedLocationScreen extends StatelessWidget {
                 const SearchHeaderWidget(),
                 const SearchWeatherDetailsWidget(),
                 SizedBox(
-                  height: sizerHeight(20),
+                  height: sizerHeight(30),
                   child: Obx(() {
                     if (searchController.controllerState.value ==
                         ControllerState.busy) {
@@ -37,6 +37,9 @@ class SelectedLocationScreen extends StatelessWidget {
                         height: sizerSp(30),
                         width: double.infinity,
                       );
+                    } else if (searchController.controllerState.value ==
+                        ControllerState.error) {
+                      return Container();
                     }
 
                     return MapWidget(
