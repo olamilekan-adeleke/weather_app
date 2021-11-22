@@ -6,6 +6,10 @@
    <application
         android:label="weather_app"
         android:icon="@mipmap/ic_launcher">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyAyQP7hfNY6tAk6d42RrM7oBjzuHund2HQ"/>
+
+
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
