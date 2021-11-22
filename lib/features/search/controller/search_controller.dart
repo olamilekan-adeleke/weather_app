@@ -58,7 +58,8 @@ class SearchController extends GetxController {
     } on SocketException catch (e, s) {
       log(e.toString());
       log(s.toString());
-      errorText.value = e.toString();
+      errorText.value =
+          'Unable to connect to server. \nPlease check your internet connection and try again!';
       cityName.value = '$place, NG';
       controllerState.value = ControllerState.error;
     } catch (e, s) {
