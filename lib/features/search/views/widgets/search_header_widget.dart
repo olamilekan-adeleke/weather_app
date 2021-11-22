@@ -20,43 +20,46 @@ class SearchHeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        const Icon(Icons.arrow_back_ios_new, color: white),
-        SizedBox(width: sizerSp(5)),
-        Container(
-          padding: EdgeInsets.symmetric(
-            horizontal: sizerSp(15),
-            vertical: sizerSp(10),
-          ),
-          // height: sizerSp(43),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(sizerSp(20)),
-            color: const Color(0xff7E59Ed),
-          ),
-          child: Row(
-            children: <Widget>[
-              SvgPicture.asset('asset/location.svg'),
-              SizedBox(width: sizerSp(8)),
-              Obx(() {
-                if (searchController.controllerState.value ==
-                    ControllerState.busy) {
-                  return shimmerRectangle(
-                    height: sizerSp(10),
-                    width: sizerSp(45),
-                  );
-                }
+    return GestureDetector(
+      onTap: () => Get.back(),
+      child: Row(
+        children: <Widget>[
+          const Icon(Icons.arrow_back_ios_new, color: white),
+          SizedBox(width: sizerSp(5)),
+          Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: sizerSp(15),
+              vertical: sizerSp(10),
+            ),
+            // height: sizerSp(43),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(sizerSp(20)),
+              color: const Color(0xff7E59Ed),
+            ),
+            child: Row(
+              children: <Widget>[
+                SvgPicture.asset('asset/location.svg'),
+                SizedBox(width: sizerSp(8)),
+                Obx(() {
+                  if (searchController.controllerState.value ==
+                      ControllerState.busy) {
+                    return shimmerRectangle(
+                      height: sizerSp(10),
+                      width: sizerSp(45),
+                    );
+                  }
 
-                return textWidget(
-                  searchController.weatherModel?.value.cityName ?? '',
-                  size: sizerSp(12),
-                  fontWeight: FontWeight.w400,
-                );
-              }),
-            ],
+                  return textWidget(
+                    searchController.weatherModel?.value.cityName ?? '',
+                    size: sizerSp(12),
+                    fontWeight: FontWeight.w400,
+                  );
+                }),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
