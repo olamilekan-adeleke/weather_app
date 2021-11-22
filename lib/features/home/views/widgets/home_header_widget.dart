@@ -38,7 +38,7 @@ class HomeHeaderWidget extends StatelessWidget {
               SvgPicture.asset('asset/location.svg'),
               SizedBox(width: sizerSp(8)),
               Obx(() {
-                if (getOneCallWeatherController.controllerState.value !=
+                if (getOneCallWeatherController.controllerState.value ==
                     ControllerState.busy) {
                   return shimmerRectangle(
                     height: sizerSp(10),
