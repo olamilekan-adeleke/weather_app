@@ -7,6 +7,7 @@ A Weather app Flutter project.
 - Location lookup - select location in nigeria (to add more later)
 - Option to check Temperature in Fahrenheit or Celsius (tap on temp value on home page to toggle value)
 - Notification Page to display custom message based on the weather condition (Weather Condition Returned from API)
+- google map added!
 
 
 ## images!
