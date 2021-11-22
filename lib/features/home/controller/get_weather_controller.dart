@@ -107,6 +107,57 @@ class GetOneCallWeatherController extends GetxController {
     return _locationData;
   }
 
+  Future<WeatherModel?> getWeatherForBackgroundService() async {
+    try {
+      final LocationData? locationData = await getCurrentUserLocation();
+
+      if (locationData == null ||
+          locationData.latitude == null ||
+          locationData.longitude == null) return null;
+
+      var result = await _weatherService.getOneCallWeather(
+        locationData.latitude!,
+        locationData.longitude!,
+      );
+
+      if (result.statusCode == 200) {
+        final Map<String, dynamic> data = json.decode(result.bodyString);
+
+        
+        final String cityName =
+            await _reverseGeocodingService.getCityNameFromLatLng(
+                  locationData.latitude!,
+                  locationData.longitude!,
+                ) ??
+                '';
+
+        // add city name to map
+        data['cityName'] = cityName;
+
+        final WeatherModel _weatherModel = WeatherModel.fromMap(data);
+        
+
+        // save notification to local DB
+        await notificationController
+            .saveNotifications(_weatherModel.toMapForLocalDB());
+        
+        return _weatherModel;
+      }
+
+      controllerState.value = ControllerState.success;
+    } on SocketException catch (e, s) {
+      log(e.toString());
+      log(s.toString());
+      errorText.value = e.toString();
+      controllerState.value = ControllerState.error;
+    } catch (e, s) {
+      log(e.toString());
+      log(s.toString());
+      errorText.value = e.toString();
+      controllerState.value = ControllerState.error;
+    }
+  }
+
   @override
   void onReady() {
     getWeather();
