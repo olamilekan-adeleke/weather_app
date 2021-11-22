@@ -26,7 +26,7 @@ class _$WeatherService extends WeatherService {
 
   @override
   Future<Response<dynamic>> getCurrentWeatherByPlaceName(String query) {
-    final $url = '/onecall';
+    final $url = '/weather';
     final $params = <String, dynamic>{'q': query};
     final $request = Request('GET', $url, client.baseUrl, parameters: $params);
     return client.send<dynamic, dynamic>($request);

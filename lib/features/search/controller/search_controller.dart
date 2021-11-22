@@ -29,7 +29,7 @@ class SearchController extends GetxController {
       var result =
           await _weatherService.getCurrentWeatherByPlaceName('$place, ng');
 
-      // log(result.bodyString);
+      log(result.bodyString);
 
       if (result.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(result.bodyString);
