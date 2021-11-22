@@ -8,7 +8,6 @@ import 'features/home/binding/home_bindging.dart';
 
 Future<void> main() async {
   await Hive.initFlutter();
-  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -23,7 +22,6 @@ class MyApp extends StatelessWidget {
           title: 'Weather App',
           theme: ThemeData(primarySwatch: Colors.blue),
           debugShowCheckedModeBanner: false,
-          // home: const HomeScreen(),
           initialRoute: '/',
           getPages: pages(),
         );
@@ -32,7 +30,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
 List<GetPage<dynamic>>? pages() {
   return <GetPage<dynamic>>[
     GetPage<Widget>(
@@ -40,8 +37,5 @@ List<GetPage<dynamic>>? pages() {
       name: '/',
       binding: HomeBindings(),
     ),
-    
   ];
 }
-
-

@@ -11,6 +11,9 @@ abstract class WeatherService extends ChopperService {
     @Query('lon') double lon,
   );
 
+  @Get(path: '/onecall')
+  Future<Response> getCurrentWeatherByPlaceName(@Query('q') double query);
+
   static WeatherService create() {
     final client = ChopperClient(
       baseUrl: 'https://api.openweathermap.org/data/2.5',

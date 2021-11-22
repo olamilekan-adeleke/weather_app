@@ -23,4 +23,12 @@ class _$WeatherService extends WeatherService {
     final $request = Request('GET', $url, client.baseUrl, parameters: $params);
     return client.send<dynamic, dynamic>($request);
   }
+
+  @override
+  Future<Response<dynamic>> getCurrentWeatherByPlaceName(double query) {
+    final $url = '/onecall';
+    final $params = <String, dynamic>{'q': query};
+    final $request = Request('GET', $url, client.baseUrl, parameters: $params);
+    return client.send<dynamic, dynamic>($request);
+  }
 }
