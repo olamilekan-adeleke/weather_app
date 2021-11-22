@@ -93,21 +93,24 @@ class HomeWeatherDetailsWidget extends StatelessWidget {
                 ),
               );
             }
-            return Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                textWidget(
-                  '${getOneCallWeatherController.temp.value.round()}',
-                  size: sizerSp(154),
-                  fontWeight: FontWeight.w500,
-                ),
-                textWidget(
-                  '℃',
-                  size: sizerSp(18),
-                  fontWeight: FontWeight.w400,
-                ),
-              ],
+            return GestureDetector(
+              onTap: () => getOneCallWeatherController.celsiusToFahrenheit(),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  textWidget(
+                    '${getOneCallWeatherController.temp.value.round()}',
+                    size: sizerSp(154),
+                    fontWeight: FontWeight.w500,
+                  ),
+                  textWidget(
+                    getOneCallWeatherController.isInCelsius.value ? '℃' : '°F',
+                    size: sizerSp(18),
+                    fontWeight: FontWeight.w400,
+                  ),
+                ],
+              ),
             );
           }),
           Obx(() {

@@ -21,7 +21,7 @@ class GetOneCallWeatherController extends GetxController {
   final RxString errorText = ''.obs;
   final RxDouble temp = 0.0.obs;
   Rx<WeatherModel>? weatherModel;
-  bool isInCelsius = true;
+  final RxBool isInCelsius = true.obs;
 
   Future<void> getWeather() async {
     try {
@@ -62,7 +62,7 @@ class GetOneCallWeatherController extends GetxController {
         weatherModel = _weatherModel;
 
         // set isInCelsius to true
-        isInCelsius = true;
+        isInCelsius.value = true;
         temp.value = _weatherModel.value.current.temp ?? 0;
 
         // save notification to local DB
@@ -163,12 +163,12 @@ class GetOneCallWeatherController extends GetxController {
   }
 
   void celsiusToFahrenheit() {
-    if (isInCelsius) {
+    if (isInCelsius.value) {
       temp.value = (temp.value * 1.8) + 32;
-      isInCelsius = false;
+      isInCelsius.value = false;
     } else {
       temp.value = (temp.value - 32) / 1.8;
-      isInCelsius = true;
+      isInCelsius.value = true;
     }
   }
 
