@@ -113,7 +113,6 @@ class GetOneCallWeatherController extends GetxController {
     return _locationData;
   }
 
-  
   void celsiusToFahrenheit() {
     if (isInCelsius.value) {
       temp.value = (temp.value * 1.8) + 32;

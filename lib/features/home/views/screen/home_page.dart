@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:weather_app/cores/components/custom_scaffold_widget.dart';
 import 'package:weather_app/cores/utils/custom_sizer_utils.dart';
 import 'package:weather_app/features/home/controller/get_weather_controller.dart';
@@ -31,7 +32,18 @@ class HomeScreen extends StatelessWidget {
                   const HomeWeatherDetailsWidget(),
                   SizedBox(
                     height: sizerHeight(20),
-                    child: const MapWidget(),
+                    child: Obx(() {
+                      return MapWidget(
+                        LatLng(
+                          getOneCallWeatherController.weatherModel?.value.lat ??
+                              0,
+                          getOneCallWeatherController.weatherModel?.value.lon ??
+                              0,
+                        ),
+                        placeName: getOneCallWeatherController
+                            .weatherModel?.value.cityName,
+                      );
+                    }),
                   ),
                   const HomeForecastButtonWidget(),
                 ],
