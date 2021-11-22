@@ -6,6 +6,7 @@ import 'package:weather_app/features/home/controller/get_weather_controller.dart
 import 'package:weather_app/features/home/views/widgets/home_forecast_button_widget.dart';
 import 'package:weather_app/features/home/views/widgets/home_header_widget.dart';
 import 'package:weather_app/features/home/views/widgets/home_weather_details_widget.dart';
+import 'package:weather_app/features/map/map_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -25,11 +26,14 @@ class HomeScreen extends StatelessWidget {
               height: sizerHeight(90),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const <Widget>[
-                  HomeHeaderWidget(),
-                  HomeWeatherDetailsWidget(),
-                  HomeForecastButtonWidget(),
-                  
+                children: <Widget>[
+                  const HomeHeaderWidget(),
+                  const HomeWeatherDetailsWidget(),
+                  SizedBox(
+                    height: sizerHeight(20),
+                    child: const MapWidget(),
+                  ),
+                  const HomeForecastButtonWidget(),
                 ],
               ),
             ),
