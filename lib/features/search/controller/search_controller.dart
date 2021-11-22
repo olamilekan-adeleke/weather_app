@@ -20,7 +20,7 @@ class SearchController extends GetxController {
   }
 }
 
-var stateList = [
+List<String> stateList = [
   'Abia',
   'Adamawa',
   'Akwa Ibom',
@@ -58,4 +58,5 @@ var stateList = [
   'Yobe',
   'Zamfara',
   'FCT',
+  '',
 ];

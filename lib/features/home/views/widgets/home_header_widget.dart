@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -8,6 +10,7 @@ import 'package:weather_app/cores/utils/custom_sizer_utils.dart';
 import 'package:weather_app/features/home/controller/get_weather_controller.dart';
 import 'package:weather_app/features/home/controller/home_controller.dart';
 import 'package:weather_app/features/home/enum/controller_state_enum.dart';
+import 'package:weather_app/features/search/controller/search_controller.dart';
 
 class HomeHeaderWidget extends StatelessWidget {
   const HomeHeaderWidget({
@@ -37,22 +40,35 @@ class HomeHeaderWidget extends StatelessWidget {
             children: <Widget>[
               SvgPicture.asset('asset/location.svg'),
               SizedBox(width: sizerSp(8)),
-              Obx(() {
-                if (getOneCallWeatherController.controllerState.value ==
-                    ControllerState.busy) {
-                  return shimmerRectangle(
-                    height: sizerSp(10),
-                    width: sizerSp(45),
-                  );
-                }
+              PopupMenuButton(
+                child: Obx(() {
+                  if (getOneCallWeatherController.controllerState.value ==
+                      ControllerState.busy) {
+                    return shimmerRectangle(
+                      height: sizerSp(10),
+                      width: sizerSp(45),
+                    );
+                  }
 
-                return textWidget(
-                  getOneCallWeatherController.weatherModel?.value.cityName ??
-                      '',
-                  size: sizerSp(12),
-                  fontWeight: FontWeight.w400,
-                );
-              }),
+                  return textWidget(
+                    getOneCallWeatherController.weatherModel?.value.cityName ??
+                        '',
+                    size: sizerSp(12),
+                    fontWeight: FontWeight.w400,
+                  );
+                }),
+                itemBuilder: (_) {
+                  return stateList.map((String e) {
+                    return PopupMenuItem(
+                      child: Text(e),
+                      value: e,
+                    );
+                  }).toList();
+                },
+                onSelected: (val) {
+                  log(val.toString());
+                },
+              ),
             ],
           ),
         ),
