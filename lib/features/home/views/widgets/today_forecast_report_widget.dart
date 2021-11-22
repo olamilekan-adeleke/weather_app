@@ -75,8 +75,8 @@ class TodayForecastReportWidget extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SvgPicture.asset(
-                          'asset/sunny.svg',
+                        Image.asset(
+                          'asset/${current.weather?.first.icon}.png',
                           height: sizerSp(40),
                           width: sizerSp(40),
                         ),
