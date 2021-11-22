@@ -19,7 +19,9 @@ class GetOneCallWeatherController extends GetxController {
       Get.find<NotificationController>();
   final Rx<ControllerState> controllerState = ControllerState.init.obs;
   final RxString errorText = ''.obs;
+  final RxDouble temp = 0.0.obs;
   Rx<WeatherModel>? weatherModel;
+  bool isInCelsius = true;
 
   Future<void> getWeather() async {
     try {
@@ -58,6 +60,10 @@ class GetOneCallWeatherController extends GetxController {
 
         final Rx<WeatherModel> _weatherModel = WeatherModel.fromMap(data).obs;
         weatherModel = _weatherModel;
+
+        // set isInCelsius to true
+        isInCelsius = true;
+        temp.value = _weatherModel.value.current.temp ?? 0;
 
         // save notification to local DB
         await notificationController
@@ -123,7 +129,6 @@ class GetOneCallWeatherController extends GetxController {
       if (result.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(result.bodyString);
 
-        
         final String cityName =
             await _reverseGeocodingService.getCityNameFromLatLng(
                   locationData.latitude!,
@@ -135,12 +140,11 @@ class GetOneCallWeatherController extends GetxController {
         data['cityName'] = cityName;
 
         final WeatherModel _weatherModel = WeatherModel.fromMap(data);
-        
 
         // save notification to local DB
         await notificationController
             .saveNotifications(_weatherModel.toMapForLocalDB());
-        
+
         return _weatherModel;
       }
 
@@ -155,6 +159,16 @@ class GetOneCallWeatherController extends GetxController {
       log(s.toString());
       errorText.value = e.toString();
       controllerState.value = ControllerState.error;
+    }
+  }
+
+  void celsiusToFahrenheit() {
+    if (isInCelsius) {
+      temp.value = (temp.value * 1.8) + 32;
+      isInCelsius = false;
+    } else {
+      temp.value = (temp.value - 32) / 1.8;
+      isInCelsius = true;
     }
   }
 

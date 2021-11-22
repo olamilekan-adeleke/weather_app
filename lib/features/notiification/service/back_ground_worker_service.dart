@@ -4,8 +4,8 @@ import 'package:weather_app/features/home/model/one_call_weather_moder.dart';
 import 'package:workmanager/workmanager.dart';
 
 class BackgroundWorkerService {
-  static final GetOneCallWeatherController getOneCallWeatherController =
-      GetOneCallWeatherController();
+  // static final GetOneCallWeatherController getOneCallWeatherController =
+  //     GetOneCallWeatherController();
   static final FlutterLocalNotificationsPlugin flip =
       FlutterLocalNotificationsPlugin();
 
@@ -16,7 +16,7 @@ class BackgroundWorkerService {
     Workmanager().registerPeriodicTask(
       "2",
       "simplePeriodicTask",
-      // frequency: Duration(minutes: 15),
+      // frequency: Duration(seconds: 30),
     );
   }
 
@@ -26,17 +26,17 @@ class BackgroundWorkerService {
       setUpNotification();
 
 
-      final WeatherModel? weather =
-          await getOneCallWeatherController.getWeatherForBackgroundService();
+      // final WeatherModel? weather =
+      //     await getOneCallWeatherController.getWeatherForBackgroundService();
 
-      if (weather == null) return Future.error(true);
+      // if (weather == null) return Future.error(true);
 
-      final String message =
-          'Its ${weather.current.temp?.round()} ℃, And the weather report is '
-          'a ${weather.current.weather?.first.description} day here '
-          'in ${weather.cityName}';
+      // final String message =
+      //     'Its ${weather.current.temp?.round()} ℃, And the weather report is '
+      //     'a ${weather.current.weather?.first.description} day here '
+      //     'in ${weather.cityName}';
 
-      await _showNotificationWithDefaultSound(message);
+      await _showNotificationWithDefaultSound('message');
       return Future.value(true);
     });
   }

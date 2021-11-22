@@ -98,7 +98,7 @@ class HomeWeatherDetailsWidget extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 textWidget(
-                  '${getOneCallWeatherController.weatherModel?.value.current.temp?.round() ?? ''}',
+                  '${getOneCallWeatherController.temp.value.round()}',
                   size: sizerSp(154),
                   fontWeight: FontWeight.w500,
                 ),
