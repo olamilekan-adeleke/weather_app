@@ -55,9 +55,9 @@ class HomeWeatherDetailsWidget extends StatelessWidget {
             return Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SvgPicture.asset(
-                  'asset/sunny.svg',
-                  width: sizerSp(78),
+                Image.asset(
+                  'asset/${getOneCallWeatherController.weatherModel?.value.current.weather?.first.icon}.png',
+                  width: sizerSp(45),
                   height: sizerSp(48),
                 ),
                 SizedBox(width: sizerSp(8)),
