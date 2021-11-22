@@ -46,14 +46,14 @@ class NotificationWidget extends StatelessWidget {
                         color: const Color(0xff737272),
                       ),
                       SizedBox(height: sizerSp(5)),
-                      textWidget(
-                        'Its ${notification.current.temp?.round()} ℃, ${notification.current.weather?.first.description} day in your location ' *
-                            3,
-                        size: sizerSp(14),
-                        fontWeight: FontWeight.w400,
-                        color: kcTextColor,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
+                      SizedBox(
+                        width: sizerWidth(80),
+                        child: textWidget(
+                          'Its ${notification.current.temp?.round()} ℃, And the weather report is a ${notification.current.weather?.first.description} day here in ${notification.cityName}',
+                          size: sizerSp(13),
+                          fontWeight: FontWeight.w200,
+                          color: kcTextColor,
+                        ),
                       ),
                     ],
                   ),
