@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:weather_app/cores/components/custom_button.dart';
 import 'package:weather_app/cores/components/custom_text_widget.dart';

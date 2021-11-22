@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:weather_app/cores/components/custom_text_widget.dart';
 import 'package:weather_app/cores/constants/color.dart';
@@ -30,8 +29,8 @@ class NotificationWidget extends StatelessWidget {
 
               return Row(
                 children: [
-                  SvgPicture.asset(
-                    'asset/sunny.svg',
+                  Image.asset(
+                    'asset/${notification.current.weather?.first.icon}.png',
                     height: sizerSp(25),
                     width: sizerSp(25),
                   ),
@@ -47,7 +46,7 @@ class NotificationWidget extends StatelessWidget {
                       ),
                       SizedBox(height: sizerSp(5)),
                       SizedBox(
-                        width: sizerWidth(80),
+                        width: sizerWidth(78),
                         child: textWidget(
                           'Its ${notification.current.temp?.round()} ℃, And the weather report is a ${notification.current.weather?.first.description} day here in ${notification.cityName}',
                           size: sizerSp(13),
