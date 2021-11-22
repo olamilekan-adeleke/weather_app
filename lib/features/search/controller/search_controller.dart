@@ -4,7 +4,6 @@ import 'dart:io';
 
 import 'package:get/get.dart';
 import 'package:weather_app/features/home/enum/controller_state_enum.dart';
-import 'package:weather_app/features/home/model/one_call_weather_moder.dart';
 import 'package:weather_app/features/home/service/weather_service.dart';
 import 'package:weather_app/features/search/model/place_weather_model.dart';
 import 'package:weather_app/features/search/views/screen/selected_location_screen.dart';
@@ -13,6 +12,7 @@ class SearchController extends GetxController {
   static final WeatherService _weatherService = Get.find<WeatherService>();
   final Rx<ControllerState> controllerState = ControllerState.init.obs;
   final RxString errorText = ''.obs;
+  final RxString cityName = ''.obs;
   final RxDouble temp = 0.0.obs;
   Rx<PlaceWeatherModel>? weatherModel;
   final RxBool isInCelsius = true.obs;
@@ -37,10 +37,11 @@ class SearchController extends GetxController {
         final Map<String, dynamic> data = json.decode(result.bodyString);
 
         // set cityName
-        final String cityName = '$place, NG';
+        final String _cityName = '$place, NG';
+        cityName.value = '$place, NG';
 
         // add city name to map
-        data['cityName'] = cityName;
+        data['cityName'] = _cityName;
 
         final Rx<PlaceWeatherModel> _weatherModel =
             PlaceWeatherModel.fromMap(data).obs;
@@ -58,11 +59,13 @@ class SearchController extends GetxController {
       log(e.toString());
       log(s.toString());
       errorText.value = e.toString();
+      cityName.value = '$place, NG';
       controllerState.value = ControllerState.error;
     } catch (e, s) {
       log(e.toString());
       log(s.toString());
       errorText.value = e.toString();
+      cityName.value = '$place, NG';
       controllerState.value = ControllerState.error;
     }
   }

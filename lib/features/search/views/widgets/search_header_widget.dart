@@ -50,7 +50,7 @@ class SearchHeaderWidget extends StatelessWidget {
                   }
 
                   return textWidget(
-                    searchController.weatherModel?.value.cityName ?? '',
+                    searchController.cityName.value,
                     size: sizerSp(12),
                     fontWeight: FontWeight.w400,
                   );
