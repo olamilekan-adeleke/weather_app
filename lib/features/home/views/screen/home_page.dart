@@ -29,6 +29,7 @@ class HomeScreen extends StatelessWidget {
                   HomeHeaderWidget(),
                   HomeWeatherDetailsWidget(),
                   HomeForecastButtonWidget(),
+                  
                 ],
               ),
             ),

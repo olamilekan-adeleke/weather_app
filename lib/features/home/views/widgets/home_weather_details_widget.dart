@@ -22,7 +22,7 @@ class HomeWeatherDetailsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: sizerSp(321),
+        // height: sizerSp(321),
         width: sizerSp(348),
         padding: EdgeInsets.symmetric(
           horizontal: sizerSp(15),
